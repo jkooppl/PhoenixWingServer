@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="
+        http://www.springframework.org/schema/beans 
+        http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+  <bean name="exportPayrollView" class="com.pizza73.webapp.viewResolver.ExportPayrollView"/>
+  <bean name="exportDailySalesView" class="com.pizza73.webapp.viewResolver.ExportDailySalesView"/>
+  <bean name="exportWeeklySalesView" class="com.pizza73.webapp.viewResolver.ExportWeeklySalesView"/>
+  <bean name="exportShopTotalsView" class="com.pizza73.webapp.viewResolver.ExportShopTotalsView"/>
+  <bean name="exportNewEmployeesView" class="com.pizza73.webapp.viewResolver.ExportNewEmployeesView"/>
+</beans>

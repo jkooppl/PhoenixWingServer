@@ -1,0 +1,82 @@
+#payrollPage {
+  width: 1200px;
+  background-color: #fff;
+  color: #000;
+  position: relative;
+}
+
+#payrollPageContent {
+  background: #fff;
+  padding: 10px 18px 10px 22px;
+  width: 1150px;
+}
+
+
+.payrollHeaderDay{
+width:106px;
+text-align:center;
+}
+
+.payrollHeaderStartEndTime{
+text-align:center;
+}
+
+.payrollHeaderTotal{
+text-align:center;
+}
+
+.payrollSummary{
+
+}
+
+.summarySeperator{
+   display:none;
+}
+
+.payrollInputStat{
+ font-size:22px;
+ height:31px;
+ padding-top:4px;
+ width:50px;
+ text-align:center;
+ position:relative;
+}
+
+.payrollInputHour{
+   width:105px;
+   text-align:center;
+   background-color:#dddddd;
+   position:relative;
+}
+
+.payrollInputWeeklySummary{
+ font-size:22px;
+ height:31px;
+ padding-top:4px;
+ width:50px;
+ text-align:center;
+ background-color:#dddddd;
+ position:relative;
+}
+
+.payrollInputTotalSummary{
+font-size:22px;
+height:54px;
+padding-top:20px;
+width:50px;
+text-align:center;
+background-color:#dddddd;	
+}
+
+.payrollInputHourCell{
+background-color:white;
+border:1px black;
+color:black;
+text-align:center;
+}
+
+.pageBreakMarker{
+   display:none;	
+}
+
+                         

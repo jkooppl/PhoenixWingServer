@@ -1,0 +1,1235 @@
+/* Pizza 73 website :: CSS definitions by Yellow Pencil :: May 2007 */
+table {
+  font-size: inherit;
+}
+
+select,input,textarea {
+  font: 99% arial, helvetica, clean, sans-serif;
+}
+
+pre,code {
+  font: 115% monospace;
+}
+
+body * {
+  line-height: 1.22em;
+}
+
+body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,form,fieldset,input,p,blockquote,th,td
+  {
+  margin: 0;
+  padding: 0;
+}
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+fieldset,img,a img {
+  border: 0;
+}
+
+address,caption,cite,code,dfn,em,strong,th,var {
+  font-style: normal;
+  font-weight: normal;
+}
+
+ol,ul {
+  list-style: none;
+}
+
+caption,th {
+  text-align: left;
+}
+
+h1,h2,h3,h4,h5,h6 {
+  font-size: 100%;
+}
+
+q:before,q:after {
+  content: '';
+}
+
+body {
+  font-family: arial, helvetica, sans-serif;
+  font-size: 77%;
+  background: #1c5ed8 url(../images/bgPage.jpg) repeat-x top;
+  color: #fff;
+}  /* Header definitions */
+#header {
+  position: relative;
+  width: 1000px;
+}
+
+#header ul {
+  margin: 0;
+  padding: 0;
+}
+
+#header li {
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+  display: inline;
+}
+
+#logo {
+  
+}
+
+#menuMain {
+  position: absolute;
+  top: 40px;
+  left: 250px;
+}
+
+#menuMain a {
+  color: #fff;
+  margin: 0 5px;
+  font-size: 1.3em;
+  text-decoration: none;
+}
+
+#menuMain a:hover {
+  text-decoration: underline;
+  color: #fee119;
+}
+
+#menuAccount {
+  position: absolute;
+  top: 0;
+  right: 10px;
+  width: 220px;
+  height: 40px;
+  background: #fee119 url(../images/bgMenuAccount.jpg) no-repeat top;
+  text-align: center;
+}
+
+#menuAccount a {
+  color: #095ba6;
+  padding: 10px 5px;
+  line-height: 40px;
+}
+
+#menuAccount a:hover {
+  color: #000;
+  text-decoration: none;
+}
+
+#page {
+  width: 1000px;
+  background-color: #fff;
+  color: #000;
+  position: relative;
+}
+
+#breadcrumb {
+  background: #fff;
+  font-size: 1.3em;
+  color: #000;
+  padding: 10px 25px;
+}
+
+#breadcrumb a {
+  color: #095ba6;
+}
+
+#breadcrumb a:hover {
+  color: #000;
+}  /* Basic Content Page Layouts */
+#pageContent {
+  background: #fff;
+  padding: 10px 18px 10px 22px;
+  width: 920px;
+}
+
+#contentColumn {
+  margin-right: 460px;
+}
+
+#contentColumn h1,#contentColumn h2,#contentColumn h3 {
+  margin: 10px 0;
+  line-height: 1.2em;
+  font-weight: normal;
+}
+
+#contentColumn h1 {
+  font-size: 2em;
+  color: #095ba6;
+}
+
+#contentColumn h2 {
+  font-size: 1.5em;
+}
+
+#contentColumn h2.section {
+  margin: 15px 0 0 -5px;
+  padding: 20px 0 15px 5px;
+  background: url(../images/bgSection.gif) repeat-x top;
+}
+
+#contentColumn h3 {
+  font-size: 1.3em;
+}
+
+#contentColumn strong {
+  font-size: 1.2em;
+  color: #095ba6;
+}
+
+#contentColumn strong a {
+  color: #095ba6;
+  text-decoration: none;
+}
+
+#contentColumn strong a:hover {
+  color: #000;
+  text-decoration: underline;
+}
+
+#contentColumn p.zebra {
+  background: #ebebeb;
+}
+
+#contentColumn p {
+  margin: 0 0 1em 0;
+}
+
+#contentColumn ul {
+  list-style: disc;
+  padding-left: 1em;
+}
+
+#contentColumn ol {
+  list-style: upper-roman;
+  padding-left: 1em;
+}
+
+#contentColumn li {
+  padding-left: 1em;
+}
+
+#specialColumn {
+  float: right;
+  width: 440px;
+}
+
+#specialColumn h3 {
+  clear: both;
+  color: #e7ad31;
+  padding: 20px 0 5px 0;
+  border-bottom: 10px solid #e7ad31;
+  margin-bottom: 5px;
+}
+
+#specialColumn a {
+  font-size: 1.2em;
+  text-decoration: none;
+  color: #095ba6;
+}
+
+#specialColumn a:hover {
+  text-decoration: underline;
+  color: #000;
+}
+
+#specialColumn span.price {
+  background: #095ba6 url(../images/button-top.jpg) no-repeat top;
+  width: 144px;
+  display: block;
+  float: left;
+}
+
+#specialColumn span.price a {
+  display: block;
+  width: 136px;
+  padding: 7px 4px;
+  background: url(../images/button-bottom.jpg) no-repeat bottom;
+  color: #fff;
+  font-weight: bold;
+  font-size: 1em;
+  text-decoration: none;
+  text-align: center;
+}
+
+#specialColumn span.price a:hover {
+  color: #fee119;
+  text-decoration: none;
+}
+
+#locationMap {
+  width: 420px;
+  height: 300px;
+  border: 10px solid #e7ad31;
+  border-top: none;
+  margin-top: -5px;
+}  /* Home Page Content Region */
+#homeContent {
+  background: #fff;
+  clear: both;
+  position: relative;
+  height: 265px;
+}
+
+#homeActions {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 300px;
+}
+
+#homeFeature {
+  height: 265px;
+  position: absolute;
+  top: 0;
+  left: 310px;
+  width: 432px;
+  text-align: center;
+}
+
+#homeFeatureOverlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 500;
+}
+
+ul#homeFeatureOptions {
+  position: absolute;
+  bottom: 0;
+  left: 172px;
+  width: 432px;
+  z-index: 501;
+  padding: 13px 0;
+  height: 22px;
+  list-style: none;
+}
+
+#homeFeatureOptions li {
+  background: url(../images/button-top.png) no-repeat top;
+  width: 144px;
+  float: left;
+  margin: 0;
+  padding: 0;
+}
+
+#homeFeatureOptions li a {
+  display: block;
+  width: 136px;
+  padding: 7px 4px;
+  background: url(../images/button-bottom.png) no-repeat bottom;
+  color: #fff;
+  font-weight: bold;
+  text-decoration: none;
+  text-align: center;
+}
+
+#homeFeatureOptions li a:hover {
+  color: #fee119;
+}
+
+#homePopular {
+  padding: 20px 0 0 10px;
+  clear: both;
+}
+
+#homePopular h2 {
+  color: #e7ad31;
+  margin: 0;
+  padding: 10px 0 5px 0;
+  border-bottom: 10px solid #e7ad31;
+}
+
+#homePopularFeature {
+  float: left;
+  width: 290px;
+}
+
+#homePopularFeature .specialBox {
+  background: url(../images/bgHomeFeatureExtras.jpg) repeat-x top;
+  text-align: center;
+}
+
+#homePopularFeature .specialBox img {
+  margin-top: -11px;
+}
+
+#homePopularFeature .specialBox h3 {
+  color: #d16737;
+  text-transform: uppercase;
+}
+
+#homePopularFeature .specialBox p.price {
+  background: url(../images/button-top.png) no-repeat top;
+  width: 144px;
+  margin: 0 68px;
+}
+
+#homePopularFeature .specialBox p.price a {
+  display: block;
+  width: 136px;
+  padding: 7px 4px;
+  background: url(../images/button-bottom.png) no-repeat bottom;
+  color: #fff;
+  font-weight: bold;
+  text-decoration: none;
+}
+
+#homePopularFeature .specialBox p.price a:hover {
+  color: #fee119;
+}
+
+#homePopularPizzas {
+  margin-left: 300px;
+  width: 640px;
+}
+
+#homePopularPizzas h2 {
+  margin-right: 5px;
+}
+
+#homePopularPizzas .specialBox {
+  float: left;
+  position: relative;
+  width: 155px;
+  height: 212px;
+  text-align: center;
+  border-right: 5px solid #fff;
+}
+
+#homePopularPizzas .specialBox img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 600;
+}
+
+#homePopularPizzas .specialBox h3 {
+  background: url(../images/bgBlueTransparent.png);
+  color: #fff;
+  text-transform: uppercase;
+  position: absolute;
+  top: 150px;
+  left: 0;
+  width: 158px;
+  z-index: 601;
+}
+
+#homePopularPizzas .specialBox p.price {
+  position: absolute;
+  top: 178px;
+  left: 0;
+  margin: 0 7px;
+  z-index: 602;
+  background: url(../images/button-top.png) no-repeat top;
+  width: 144px;
+}
+
+#homePopularPizzas .specialBox p.price a {
+  display: block;
+  width: 136px;
+  padding: 7px 4px;
+  background: url(../images/button-bottom.png) no-repeat bottom;
+  color: #fff;
+  font-weight: bold;
+  text-decoration: none;
+}
+
+#homePopularPizzas .specialBox p.price a:hover {
+  color: #fee119;
+}  /* Order and Menu Page Layouts */
+ul#orderSteps {
+  background: #fff;
+  height: 2.2em;
+  padding-top: 5px;
+  border-bottom: 5px solid #095ba6;
+}
+
+ul#orderSteps li {
+  float: left;
+  margin-left: 6px;
+  padding-left: 9px;
+  background: url(../images/menuTabLOff.gif) no-repeat left;
+}
+
+* html ul#orderSteps li {
+  height: 1%;
+}
+
+ul#orderSteps li a {
+  display: block;
+  float: left;
+  height: 14px;
+  padding: .6em 12px .6em 0;
+  text-align: center;
+  text-transform: uppercase;
+  font-weight: bold;
+  color: #ccc;
+  text-decoration: none;
+  background: url(../images/menuTabROff.gif) no-repeat right;
+}
+
+* html ul#orderSteps li a {
+  padding-bottom: .5em;
+}
+
+ul#orderSteps li a:hover {
+  color: #fff;
+}
+
+ul#orderSteps li.tabOn {
+  background: url(../images/menuTabLOn.gif) no-repeat left;
+}
+
+ul#orderSteps li.tabOn a {
+  color: #fee119;
+  background: url(../images/menuTabROn.gif) no-repeat right;
+}
+
+#accountReminder {
+  background: #fee119;
+  color: #000;
+  margin: 0;
+  padding: 5px 0 5px 2%;
+  width: 60%;
+  float: left;
+}
+
+#sorryClosed {
+  
+}
+
+#sorryClosedSign {
+  float: left;
+}
+
+.sorryClosedCountdown,.sorryClosedButton {
+  margin-left: 225px;
+  font-size: 1.5em;
+  padding: .25em;
+}
+
+.sorryClosedCountdown {
+  padding-top: 1em;
+}
+
+#notOpenYet {
+  background: #e2daa5;
+}
+
+#menuContent {
+  background: #fff;
+  color: #333;
+  width: 580px;
+  padding: 0 0 10px 10px;
+  float: left;
+}
+
+#thanks {
+  background: #fff;
+  color: #333;
+  width: 60%;
+  padding: 2%;
+  float: left;
+}
+
+#welcome {
+  background: #fff;
+  color: #333;
+  padding: 10px 16px;
+  margin: -20px 0 20px 0;
+}
+
+#welcome p {
+  background: #005ba8 url(../images/welcome-dude.gif) no-repeat;
+  padding: 10px 10px 10px 50px;
+  width: 240px;
+  height: 51px;
+  color: #fff;
+}
+
+#welcome a {
+  color: #fff;
+}
+
+#welcome a:hover {
+  color: #ccc;
+}
+
+#pizzaMenu,#promoFeature {
+  width: 100%;
+  clear: both;
+}
+
+#pizzaMenu th,#popMenu th,#promoFeature th {
+  padding: 5px;
+  width: 50px;
+  vertical-align: bottom;
+  text-transform: uppercase;
+}
+
+#pizzaMenu th p,#popMenu th p,#promoFeature th p {
+  margin: 0;
+  padding: 0;
+  font-size: 1.2em;
+  color: #005ba8;
+  font-weight: bold;
+}
+
+#pizzaMenu th.description {
+  background: #fff;
+  width: 66%;
+  height: 70px;
+}
+
+#pizzaMenu td.description,#promoFeature td.description {
+  background-color: #efefef;
+}
+
+#pizzaMenu .title,#popMenu .title,#promoFeature .title {
+  font-size: 1.2em;
+  font-weight: bold;
+}
+
+#pizzaMenu td,#promoFeature td {
+  padding: 5px 10px;
+  border-bottom: 1px solid #ccc;
+}
+
+#pizzaMenu a.price,#popMenu a.price {
+  text-align: center;
+  background: url(../images/price-button.jpg) no-repeat;
+  line-height: 23px;
+  color: #fff;
+  text-decoration: none;
+  text-transform: uppercase;
+  display: block;
+  width: 50px;
+}
+
+#pizzaMenu a:hover .price,#popMenu a:hover .price {
+  color: #ffe900;
+}
+
+#popMenu {
+  width: 80%;
+  clear: both;
+  margin-top: 16px;
+  border-top: 1px solid #ccc;
+}
+
+#popMenu th.description {
+  text-align: left;
+  width: 66%;
+}
+
+#popMenu td {
+  padding: 2px 5px;
+}
+
+#popMenu td .popImage {
+  float: left;
+  padding: 2px 5px;
+}
+
+#promoFeature td.image {
+  padding: 0;
+  width: 160px;
+}
+
+#promoFeature td.description {
+  
+}
+
+#promoFeature td.price a {
+  text-align: center;
+  background: url(../images/button-promofeature.jpg) no-repeat;
+  line-height: 26px;
+  color: #fff;
+  text-decoration: none;
+  text-transform: uppercase;
+  display: block;
+  width: 144px;
+}
+
+#promoFeature td.price a:hover {
+  color: #ffe900;
+}
+
+.boxItem {
+  margin-top: 8px;
+  padding: 8px 0;
+  clear: both;
+  border-top: 1px solid #ccc;
+}
+
+.boxItem h1 {
+  font-size: 1.4em;
+}
+
+.boxImage {
+  float: left;
+  width: 200px;
+}
+
+.boxDescription {
+  float: left;
+  width: 20%;
+  margin-right: 5%;
+  padding-bottom: 10px;
+}
+
+ul.boxOptions {
+  float: left;
+  margin: 0 10px 0 0;
+  padding: 0;
+  width: 144px;
+}
+
+ul.boxOptions li {
+  background: #095ba6 url(../images/button-top.jpg) no-repeat top;
+  margin-bottom: 1px;
+}
+
+ul.boxOptions a {
+  display: block;
+  width: 136px;
+  padding: 7px 4px;
+  background: url(../images/button-bottom.jpg) no-repeat bottom;
+  color: #fff;
+  font-weight: bold;
+  text-decoration: none;
+  text-align: center;
+}
+
+ul.boxOptions a:hover {
+  color: #ffe900;
+}  /* Order Receipt Layouts */
+div.orderPage {
+  background: url(../images/bgMenuPage.gif) repeat-y;
+}
+
+#orderPanel {
+  margin-left: 600px;
+}
+
+#orderReceipt {
+  width: 349px;
+  background-color: #095ba6;
+  color: #fff;
+  padding: 20px 0 10px 10px;
+}
+
+* html #orderReceipt {
+  width: 345px;
+  height: 1%;
+}
+
+#orderReceipt h1 {
+  padding-left: 10px;
+}
+
+#orderItems h2 {
+  padding-left: 10px;
+}
+
+#orderReceipt .item {
+  padding: 10px 50px 10px 70px;
+}
+
+* html #orderReceipt .item {
+  padding: 10px 10px 10px 50px;
+  height: 1%;
+}
+
+#orderReceipt .item .price {
+  float: right;
+}
+
+#orderReceipt .item h2 {
+  margin-left: -60px;
+  font-size: 1.2em;
+}
+
+* html #orderReceipt .item h2 {
+  margin-left: -10px;
+}
+
+#orderReceipt .item .title {
+  font-size: 1.2em;
+  font-weight: bold;
+  margin-left: -60px;
+}
+
+* html #orderReceipt .item .title {
+  margin-left: -10px;
+}
+
+#orderReceipt .item a.delete {
+  color: #fff;
+  font-size: .9em;
+  font-weight: normal;
+}
+
+#orderReceipt select {
+  display: block;
+}
+
+#orderReceipt label {
+  display: block;
+  float: left;
+  width: 40px;
+  text-align: right;
+  margin-left: -52px;
+  padding: 2px;
+}
+
+* html #orderReceipt label {
+  margin-left: -20px;
+}
+
+#orderReceipt .helpMenu {
+  float: right;
+  display: block;
+}
+
+#orderReceipt select.quantity {
+  display: inline;
+}
+
+#orderReceipt .pay {
+  background-color: #064692;
+}
+
+#orderReceipt .requestAction {
+  background-color: #ffe900;
+  color: #000;
+}
+
+#orderReceipt table#totals {
+  margin-top: 16px;
+  width: 100%;
+  font-size: 1.2em;
+}
+
+#orderReceipt .image {
+  padding: 10px 50px 10px 50px;
+}
+
+* html #orderReceipt .image {
+  height: 1%;
+}
+
+#orderReceipt #cost {
+  padding-left: 20px;
+}
+
+button#placeOrder {
+  margin-top: 16px;
+  padding: 0;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+}
+
+#disabledImageZone {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+}  /* Checkout Page Defs */
+.checkoutTask {
+  clear: both;
+  border-top: 1px solid #ccc;
+  padding: 15px 10px;
+}
+
+.checkoutTask h1 {
+  font-size: 1.4em;
+  color: #005ba8;
+}
+
+.checkoutTask table#orderTotal {
+  width: 100%;
+  font-size: 1.1em;
+}
+
+.checkoutTask table#orderTotal td {
+  padding: 2px 10px;
+}
+
+span.checkoutError,.jsError {
+  clear: both;
+  padding: 15px 10px;
+  background-color: #ffe900;
+  color: #000;
+  font-weight: bold;
+}
+
+span.checkoutError h1,.jsError h1 {
+  font-size: 1.4em;
+  color: #005ba8;
+}
+
+span.checkoutError {
+  display: block;
+}
+
+input.checkoutError {
+  background-color: #ffe900;
+  color: #000;
+}
+
+td.checkoutError {
+  background-color: #ffe900;
+  color: #000;
+}
+
+select.checkoutError {
+  background-color: #ffe900;
+  color: #000;
+}
+
+.checkoutTask label.error {
+  font-weight: bold;
+  color: #f00;
+}
+
+label {
+  display: block;
+  font-size: .9em;
+}
+
+#demographics {
+  width: 450px;
+  border-top: 0;
+}
+
+.customerForm {
+  width: 400px;
+  float: left;
+}
+
+#demographics .column1,.customerForm .column1 {
+  float: left;
+  margin-right: 10px;
+  width: 165px;
+  clear: both;
+}
+
+#demographics .column2,.customerForm .column2 {
+  float: left;
+  margin-right: 10px;
+  width: 165px;
+}
+
+#demographics .column3 {
+  clear: both;
+}
+
+.customerForm .column3 {
+  clear: both;
+  width: 200px;
+}
+
+#demographics p,#paymentMethod p,#loginForm p,#passwordForm p,#customerComment p,.customerForm p
+  {
+  padding: 3px 0;
+  margin: 0;
+}
+
+#paymentMethod .textInput,#loginForm .textInput,#passwordForm .textInput,#customerComment .textInput
+  {
+  width: 175px;
+  font-size: 1.2em;
+}
+
+#demographics .textInput,.customerForm .textInput {
+  width: 150px;
+}
+
+#customerComment .textArea,.customerForm .textArea {
+  width: 300px;
+  height: 150px;
+}
+
+#demographics .column2 .textInput,#demographics .column3 .textInput,#demographics .column2 .textSelect,#demographics .column3 .textSelect
+  {
+  width: 165px;
+}
+
+#loginDiv .column1,#loginDiv .column2 {
+  float: left;
+  margin-right: 25px;
+  width: 200px;
+}
+
+#thanks h1 {
+  font-size: 1.4em;
+}
+
+#thanks ul {
+  margin: .5em;
+  padding: 0 .5em;
+}
+
+#thanks li {
+  list-style: disc;
+  padding: 0 1em;
+}
+
+label.required:after {
+  color: black;
+  content: '*';
+}
+
+label.requiredPickup:after {
+  color: blue;
+  content: '*';
+}
+
+label.requiredDelivery:after {
+  color: black;
+  content: '*';
+}
+
+label.requiredBoth:after {
+  color: black;
+  content: '**';
+}
+
+table#phoneList {
+  border-collapse: collapse;
+}
+
+table#phoneList td {
+  padding: 5px;
+  border-collapse: collapse;
+  font-size: 1.2em;
+}  /* Footer Definitions */
+#footer {
+  clear: both;
+  padding: 30px 10px 0 10px;
+  background: #fff;
+  min-height: 172px;
+  margin-top: 10px;
+  width: 980px;
+}
+
+#footer h3 {
+  color: #6da0c0;
+  margin: 5px 7px;
+  height: 14px;
+}
+
+#footer li {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+#footer ul {
+  padding: 10px 20px;
+  background: #095ba6;
+  min-height: 128px;
+}
+
+#footer a {
+  color: #a4caff;
+  text-decoration: none;
+  display: block;
+  padding: 2px 0;
+}
+
+#footer a:hover {
+  color: #fee119;
+}
+
+#footerMenuPhone,#footerMenuAbout,#footerMenuAdmin,#footerMenuNews {
+  float: left;
+  border-right: 5px solid #fff;
+  width: 208px;
+}
+
+#footerMenuPhone {
+  width: 290px;
+  margin-right: 5px;
+}
+
+#footerMenuPhone a {
+  margin: 0;
+  padding: 0;
+}
+
+.quantityChange {
+  font-size: 1.2em;
+  padding: 0 .25em;
+}  /* Self-cleared elements */
+#page
+ 
+:after
+,
+#header
+ 
+:after
+,
+#footer
+ 
+:after
+,
+h2
+.section
+:after
+,
+#footerMenuNews
+
+  
+:after
+,
+#featureSpecial
+ 
+:after
+,
+.featureSpecial
+:after
+ 
+#homeFeature
+
+  
+:after
+,
+#sorryClosed
+ 
+:after
+,
+#pageContent
+ 
+:after
+ 
+;
+{
+content
+:
+ 
+".";
+display
+:
+ 
+block
+;
+
+  
+height
+:
+ 
+0;
+clear
+:
+ 
+both
+;
+
+  
+visibility
+:
+ 
+hidden
+;
+
+
+} /* IE versions of the clearing elements */
+#page,#header,#footer,#footerMenuNews,#featureSpecial,.featureSpecial,#homeFeature,#pageContent
+  {
+  display: inline-block;
+}  /* Hide for IE-Mac \*/
+* html #page,* html #header,* html #footer,* html #footerMenuNews,* html #featureSpecial,* html #featureSpecial,* html #homeFeature,* html #pageContent
+  {
+  height: 1%;
+  display: block;
+}  /* The above definition(s) fix(es) IE<=6x */ /* IE Hacks */
+* html #orderItems {
+  float: left;
+}
+
+* html #orderReceipt .item,* html #orderReceipt .item *,* html #menuContent div
+  {
+  height: 1%;
+}
+
+* html #footer ul {
+  height: 128px;
+}
+
+* html #footer li {
+  display: inline;
+}
+
+* html #footer li a {
+  display: block;
+}
+
+* html ul#homeFeatureOptions {
+  top: 220px;
+}
+
+* html #homeFeatureOptions li,* html #homePopularFeature .specialBox p.price,* html #homePopularPizzas .specialBox p.price
+  {
+  background: url(../images/button-top.gif) no-repeat top;
+}
+
+* html #homeFeatureOptions li a,* html #homePopularFeature .specialBox p.price a,* html #homePopularPizzas .specialBox p.price a
+  {
+  padding: 4px;
+  background: url(../images/button-bottom.gif) no-repeat bottom;
+}
+
+.boxoverhdr {
+  background: #005ba8;
+  font-family: arial;
+  font-size: 12px;
+  font-weight: bold;
+  border: 1px solid #333;
+  padding: 5px;
+  width: 150px;
+}
+
+.boxoverbdy {
+  background: #FFFFFF;
+  color: #005ba8;
+  font-family: arial;
+  font-size: 12px;
+  border-left: 1px solid #005ba8;
+  border-right: 1px solid #005ba8;
+  border-bottom: 1px solid #005ba8;
+  padding: 5px;
+  width: 150px;
+}
+
+#orderHeader {
+  position: relative;
+}
+
+#loadingGif {
+  position: absolute;
+  top: 0;
+  right: 0;
+  visibility: hidden;
+}
+
+#payroll {
+  background: #ebebeb;
+}
+
+.payrollZebra {
+  background: #1C5ED8;
+  color: white 
+}
+
+.payrollTable td, .payrollTable th {
+  width: 4em;
+}
+
+.payrollInput{
+   width:50px;
+   position:relative
+}

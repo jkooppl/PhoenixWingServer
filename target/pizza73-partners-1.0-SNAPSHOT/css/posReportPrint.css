@@ -1,0 +1,136 @@
+#header {
+ display:none;
+}
+  
+#orderSteps{
+ display:none;
+}
+  
+#shopSelectorDiv{
+ display:none;
+}
+
+#dateInfo{
+ display:none;
+}
+
+#printHeader{
+ display:block;
+ width:900px;
+ font-size:24px;
+ text-align:center;	
+}
+
+.excelImageHolderTD{
+ display:none;	
+}
+
+.transparentInputFiled{
+ border:0px none;
+ margin:0px;
+ padding:0px;                 
+}
+
+.glossymenu{
+ display:none;	
+}
+.textCell{
+ font-size:12px;
+}
+
+.weeklyLabel{
+ font-size:12px;
+}
+#infoConsole{
+ display:none;	
+}
+
+#errorConsole{
+ display:none;	
+}
+
+#inStoreGiftCertificate_label_1{
+ font-size:14px;	
+}
+
+#inStoreGiftCertificate_label_2{
+ font-size:14px;	
+}
+
+#frontCounterSummary{
+ font-size:14px;	
+}
+
+.inputField{
+ border:0px none;
+ margin:0px;
+ padding:0px; 
+}
+.buttonHolder{
+ display:none;             
+}       
+
+.batchRecordDigitInputField{
+ border:0px none;
+ width:63px;
+}
+
+.batchRecordNumberInputField{
+ border:0px none;
+ width:130px;
+}
+
+.transparentBatchRecordNumberInputField{
+ border:0px none;
+ width:130px;
+}
+
+.dailyWirelessForm{
+  width:710px;
+}
+
+.digitCellInWirelessForm {
+width:67px;
+}
+
+.michineTotalCellInWirelessForm{
+width:130px;
+border:1px solid black;
+}
+
+.transparentBatchRecordDigitInputField{
+width:63px;
+border:0px none;
+}
+
+.batchRecordDigitMastercardInputField{
+ width:67px;
+ text-align:center;
+}
+
+#NA_wireless_machine_total{
+  width:85px;
+}
+
+#visaTotal_cell_2{
+width:77px;
+}
+
+#mastercardTotal_cell_2{
+width:67px;
+}
+
+#amexTotal_cell_2{
+width:79px;
+}
+
+#debitTotal_cell_2{
+width:80px;
+}
+
+#NA_total_batchNumber_total{
+width:135px;
+}
+
+#machineTotal_cell_1{
+width:133px;

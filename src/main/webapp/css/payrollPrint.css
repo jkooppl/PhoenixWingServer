@@ -1,0 +1,101 @@
+  #header {
+    display:none;
+  }
+  
+  #orderSteps{
+    display:none;
+  }
+  
+  .payrollSummary{
+   display:block;
+   float:left;
+   text-align:center;
+  }
+  
+  .summarySeperator{
+   margin-left:10px;
+   margin-right:10px;
+  }
+  
+  .column1{
+    display:none;
+  }
+  
+  .nonFirstRecord{
+    display:none;
+  }
+  
+  .payrollInputWeekNum{
+   border:1px solid;
+   font-size:11px;
+  }
+  
+  .payrollInputCell{
+   border:1px solid;
+  }
+  
+  .payrollInput{
+  width:47px;
+  font-size:12px;
+  position:relative;
+  border:0px none;
+  }
+  
+  .payrollInputHour{
+	width:98px;
+	text-align:center;
+	background-color:#dddddd;
+	border:0px none;
+	position:relative;
+}
+
+  .payrollInputHourCell{
+   background-color:white;
+   border:1px solid black;
+   color:black;
+   text-align:center;
+  }
+  
+  .payrollInputStat{
+   font-size:18px;
+   height:27px;
+   padding-top:8px;
+   width:44px;
+   text-align:center;
+   border:0px none;
+   position:relative;
+  }
+  
+   .payrollInputWeeklySummary{
+   font-size:18px;
+   height:27px;
+   padding-top:8px;
+   width:44px;
+   text-align:center;
+   border:0px none;
+   background-color:#dddddd;
+   position:relative;
+  }
+  
+  .payrollInputTotalSummary{
+  font-size:18px;
+  height:50px;
+  padding-top:24px;
+  width:44px;
+  text-align:center;
+  background-color:#dddddd;
+  border:0px none;
+  }
+  
+  .payrollEmptyRow{
+    display:none;
+  }
+  
+  .payrollHeaderTotal{
+    font-size:12px;
+	text-align:center;
+  }
+  .pageBreakMarker{
+    page-break-after:always;
+  }
+  

@@ -1,0 +1,17 @@
+Your Pizza 73 Order Confirmation (# ${CONFIRMATION_NUMBER})
+
+${DELIVERY_DETAILS}
+			
+${EMAIL_COMPLETE_CART}
+
+Order Comment:
+${ORDER_COMMENT}
+
+${APPLICATION_URL}
+
+At Pizza73 we make it a priority to complete your order as specified, however, 
+sometimes conditions may arise that prevent us from doing that.  If there is an
+issue with your order we will do our best to contact you.
+
+This is an automatically generated email confirming your order.  If there are 
+any errors with the order details seen here please call 310.7373 for assistance.

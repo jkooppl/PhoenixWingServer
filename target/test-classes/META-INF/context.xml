@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Context path="wings">
+  <Resource auth = "Container" driverClassName = "org.postgresql.Driver" factory = "org.apache.tomcat.jdbc.pool.DataSourceFactory"
+    initialSize = "4" maxActive = "100" maxIdle = "10000" minEvictableIdleTimeMillis = "30000" minIdle = "10"
+    name = "jdbc/Cheddar" password = "cheesypass" removeAbandoned = "true" removeAbandonedTimeout = "60"
+    testOnBorrow = "true" testOnReturn = "false" testWhileIdle = "true" timeBetweenEvictionRunsMillis = "5000"
+    type = "javax.sql.DataSource" username = "iqueso" validationInterval = "30000" validationQuery = "SELECT 1"
+    url = "jdbc:postgresql://deweydog.com/iqueso" />
+</Context>

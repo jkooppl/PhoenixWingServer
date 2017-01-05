@@ -1,0 +1,277 @@
+#printHeader{
+    display:none;	
+}
+
+.autoCell {
+	background-color: #dddddd;
+	text-align:center;
+}
+
+.mainTableFrame{
+  border:0;
+}
+
+.mainInfoTable{
+	margin:5px 0px 0px 0px;
+	font-weight:bold;
+	font-stretch:narrower;
+}
+
+.dateInfoTD{
+  width:260px;
+  vertical-align:top;
+}
+
+.writerInfoTD{
+  width:260px;
+  vertical-align:top;
+}
+
+.shopInfoTD{
+  width:300px;
+  vertical-align:top;
+}
+
+.layoutTD{
+   vertical-align:top;
+}
+
+
+.layoutTable{
+	vertical-align:top; 
+	margin:0px 50px 20px 0px;
+	width:220px;
+}
+
+.dailyWirelessForm{
+	vertical-align:top; 
+	margin:0px 50px 0px 0px;
+	width:665px;
+}
+
+#NA_total_batchNumber_total{
+	width:103px;
+}
+
+#machineTotal_cell_1{
+	width:94px;	
+}
+
+.tdCell{
+	border:1px solid black;
+}
+
+.weeklyDigitCell{
+  width:60px;
+}
+
+.weeklyLabel{
+  width:160px;
+}
+
+.digitCell{
+   width:55px;
+}
+
+.inputField{
+  width:51px;
+  text-align:center;
+}
+
+.transparentInputFiled{
+  width:51px;
+  background-color:transparent;
+  border:0px none;
+  margin:2px;
+  text-align:center;
+}
+
+.batchRecordDigitInputField{
+  width:75px;
+  text-align:center;
+}
+
+.transparentBatchRecordDigitInputField{
+  width:75px;
+  background-color:transparent;
+  border:0px none;
+  margin:2px;
+  text-align:center;
+}
+
+.machineCellInWirelssForm{
+  width:64px;
+  text-align:center;
+}
+
+.batchRecordNumberInputField{
+  width:100px;
+  text-align:center;
+}
+
+.transparentBatchRecordNumberInputField{
+  width:100px;
+  background-color:transparent;
+  border:0px none;
+  margin:2px;
+  text-align:center;
+}
+
+.inputFieldOnFocus{
+border: 0px none;
+margin: 2px; 
+}
+
+.inputFieldError{
+background-color:#E2717E;
+}
+
+.digitCellInWirelessForm{
+   width:79px;
+}
+
+.calendarImage{
+margin:11px 0px 0px 7px;
+cursor:pointer;
+}
+
+.excelImage{
+margin-left:50px;
+cursor:pointer;
+}
+
+.excelBWImage{
+margin-left:50px;
+cursor:default;
+}
+
+.machineCellInWirelessForm{
+  width:100px;
+}
+
+.highlightTD{
+background-color:#C3F991;
+font-weight:bold;
+}
+
+.blueTD{
+background-color:#FFFF00;
+font-weight:bold;
+}
+
+.blueFocusTD{
+background-color:#FFFF00;
+font-weight:bold;
+}
+
+.blueFlag{
+	
+}
+
+.focusTD{
+background-color:#C3F991;
+font-weight:bold;
+}
+
+.onFocusTD{
+background-color:#9BBBDD;
+}
+
+.highlightTD input{
+font-weight:bold;
+border: 0px none;
+margin: 2px;
+}
+
+.focusTD input{
+font-weight:bold;
+border: 0px none;
+margin: 2px;
+}
+
+#popupCalendar{ 
+display:none; 
+position:absolute; 
+left:756px; 
+top:175px; 
+z-index:100;
+color:black;}
+
+#shopSelectorInfo{
+font-size: 16px;
+color:blue;
+maring-left:10px;
+} 
+
+/*override the rule in shopApp.css */
+#pageContent {
+   padding: 0px 0px 10px 10px;
+   width:990px;
+}
+
+  
+/*Credits: By Santosh Setty (http://webdesigninfo.wordpress.com) */
+/*Posted to: Dynamic Drive CSS Library (http://www.dynamicdrive.com/style/) */
+
+.glossymenu{
+	position: relative;
+	padding: 0 0 0 0px;
+	margin: 0 0 0 0;
+	background: url(../images/menub_bg.gif) repeat-x; /*tab background image path*/
+	height: 46px;
+	list-style: none;
+}
+
+.glossymenu li{
+   float:left;
+}
+
+.glossymenu li span{
+	float:left;
+	display: block;
+	color:#999;
+	text-decoration: none;
+	font-family: sans-serif;
+	font-size: 12px;
+	font-weight: bold;
+	padding:0 16px 0 16px; /*Padding to accomodate left tab image. Do not change*/
+	height: 46px;
+	line-height: 46px;
+	text-align: center;
+	cursor: default;	
+}
+
+
+
+.glossymenu li a{
+	float: left;
+	display: block;
+	color:#000;
+	text-decoration: none;
+	font-family: sans-serif;
+	font-size: 12px;
+	font-weight: bold;
+	padding:0 0 0 16px; /*Padding to accomodate left tab image. Do not change*/
+	height: 46px;
+	line-height: 46px;
+	text-align: center;
+	cursor: pointer;	
+}
+
+.glossymenu li a b{
+	float: left;
+	display: block;
+	padding: 0 16px 0 0px; /*Padding of menu items*/
+	line-height: 46px; /* override the 'line-height:1.22em in shopApp.css */
+}
+
+.glossymenu li.current a, .glossymenu li a:hover{
+	color: #fff;
+	background: url(../images/menub_hover_left.gif) no-repeat; /*left tab image path*/
+	background-position: left;
+}
+
+.glossymenu li.current a b, .glossymenu li a:hover b{
+	color: #fff;
+	background: url(../images/menub_hover_right.gif) no-repeat right top; /*right tab image path*/
+}

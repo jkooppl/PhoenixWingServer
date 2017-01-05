@@ -1,0 +1,5 @@
+Employee Update Results:
+
+#foreach( $result in $RESULTS )
+    $result
+#end

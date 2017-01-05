@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="pizza73-partners:war">
+    <output-path>$PROJECT_DIR$/target</output-path>
+    <root id="archive" name="pizza73-partners-1.0-SNAPSHOT.war">
+      <element id="artifact" artifact-name="pizza73-partners:war exploded" />
+    </root>
+  </artifact>
+</component>

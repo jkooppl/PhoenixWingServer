@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+     http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+     http://www.springframework.org/schema/context 
+     http://www.springframework.org/schema/context/spring-context-3.0.xsd">
+
+	<!--
+		Configurer that replaces MavenProject: com.pizza73:pizza73-partners:1.0-SNAPSHOT @ C:\\appDev\\Project\\workspace\\Dev001\\pizza73-partners\\pom.xml placeholders with values from a
+		properties file
+	-->
+	<!--
+		(in this case, JDBC-related settings for the dataSource definition
+		below)
+	-->
+	<context:property-placeholder location="classpath:jdbc.properties" />
+	<context:property-placeholder location="classpath:mail.properties" />
+
+<!--
+<bean id="dataSource" class="org.springframework.jndi.JndiObjectFactoryBean">
+        <property name="jndiName" value="java:comp/env/jdbc/LocalCheddar" />
+        <property name="resourceRef" value="true" />
+    </bean>
+-->
+<bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource"
+		p:driverClass="org.postgresql.Driver" p:jdbcUrl="jdbc:postgresql://cheddar/iqueso"
+		p:user="iqueso" p:password="cheesypass"
+		p:initialPoolSize="3" p:minPoolSize="3" p:maxPoolSize="30"
+		p:idleConnectionTestPeriod="600" p:maxIdleTimeExcessConnections="3600" />
+</beans>

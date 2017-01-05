@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:dwr="http://www.directwebremoting.org/schema/spring-dwr"
+	xmlns:p="http://www.springframework.org/schema/p" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:tx="http://www.springframework.org/schema/tx" xmlns:task="http://www.springframework.org/schema/task"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="
+        http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context-3.0.xsd
+        http://www.springframework.org/schema/task
+        http://www.springframework.org/schema/task/spring-task-3.0.xsd
+        http://www.directwebremoting.org/schema/spring-dwr
+        http://www.directwebremoting.org/schema/spring-dwr-2.0.xsd
+        http://www.springframework.org/schema/tx
+        http://www.springframework.org/schema/tx/spring-tx-3.0.xsd
+        http://www.springframework.org/schema/aop
+        http://www.springframework.org/schema/aop/spring-aop-3.0.xsd">
+	  <!--
+      Auto-detected beans labeled with @Repository and @Service.
+   -->
+  <context:component-scan base-package="com.pizza73" />
+
+  <!--
+    Activates various annotations to be detected in bean classes:
+    Spring's @Required and @Autowired, as well as JSR 250's @Resource.
+  -->
+  <context:annotation-config />
+  <context:spring-configured />
+
+  <tx:annotation-driven />
+  <!--task:annotation-driven/-->
+
+	<!-- EXCEPTION MAPPINGS  -->
+	<bean id="exceptionResolver" class="com.pizza73.webapp.base.exception.WebExceptionHandler" />
+
+	<!-- added by JunJie Zhu, used for DailySales Report -->
+	<bean id="dailySalesInterceptor" class="com.pizza73.webapp.interceptor.DailySalesInterceptor">
+	</bean>
+	<!-- END -->
+
+	<bean
+		class="org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping">
+		<property name="order" value="1" />
+		<property name="interceptors">
+			<list>
+				<ref bean="dailySalesInterceptor" />
+			</list>
+		</property>
+	</bean>
+
+	<bean id="dwrMapping"
+		class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping">
+		<property name="order" value="3" />
+		<property name="mappings">
+			<props>
+				<prop key="/engine.js">dwrController</prop>
+				<prop key="/util.js">dwrController</prop>
+				<prop key="/interface/**">dwrController</prop>
+				<prop key="/call/**">dwrController</prop>
+				<prop key="/dwr/**">dwrController</prop>
+			</props>
+		</property>
+	</bean>
+
+
+	<!-- View Resolver for JSPs -->
+	<bean id="viewResolver"
+		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<property name="requestContextAttribute" value="rc" />
+		<property name="viewClass"
+			value="org.springframework.web.servlet.view.JstlView" />
+		<property name="prefix" value="/WEB-INF/pages/" />
+		<property name="suffix" value=".jsp" />
+	</bean>
+
+	<bean id="excelViewResolver" class="org.springframework.web.servlet.view.XmlViewResolver">
+	  <property name="order" value="1"/>
+	  <property name="location" value="/WEB-INF/views.xml"/>
+	</bean>
+
+	<!-- PROPERTIES -->
+	<bean id="productProperty" class="com.pizza73.webapp.base.property.ProductPropertyEditor">
+	</bean>
+	<bean id="deliverEnumProperty" class="com.pizza73.webapp.base.property.EnumEditor">
+		<property name="cls" value="com.pizza73.model.enums.DeliveryMethod" />
+		<property name="useOrdinal" value="false" />
+	</bean>
+	<bean id="paymentEnumProperty" class="com.pizza73.webapp.base.property.EnumEditor">
+		<property name="cls" value="com.pizza73.model.enums.PaymentMethod" />
+		<property name="useOrdinal" value="false" />
+	</bean>
+
+	<!-- VALIDATORS -->
+	<bean id="baseDWRValidator" class="com.pizza73.webapp.base.validator.BaseDWRValidator">
+		<property name="messageSource" ref="messageSource" />
+	</bean>
+
+	<bean id="dailySalesValidator" class="com.pizza73.webapp.validator.DailySalesValidator">
+		<property name="messageSource" ref="messageSource" />
+	</bean>
+
+	<bean id="driverValidator" class="com.pizza73.webapp.validator.DriverFormValidator"
+		parent="baseDWRValidator">
+		<dwr:remote javascript="DriverValidatorJS">
+			<dwr:include method="getInputFieldValidationMessage" />
+		</dwr:remote>
+	</bean>
+
+	<bean id="employeeValidator" class="com.pizza73.webapp.validator.EmployeeFormValidator"
+		parent="baseDWRValidator">
+		<dwr:remote javascript="EmployeeValidatorJS">
+			<dwr:include method="getInputFieldValidationMessage" />
+		</dwr:remote>
+	</bean>
+
+	<bean id="loginIdChangeValidator" class="com.pizza73.webapp.validator.LoginIdChangeValidator"
+		parent="baseDWRValidator">
+	</bean>
+
+	<bean id="messageSource"
+		class="org.springframework.context.support.ResourceBundleMessageSource">
+		<property name="basename" value="ApplicationResources" />
+	</bean>
+
+	<dwr:configuration />
+	<dwr:controller id="dwrController" debug="true" >
+	   <dwr:config-param name="crossDomainSessionSecurity" value="false"/>
+	</dwr:controller>
+
+	<bean id="ajaxManager" class="com.pizza73.webapp.action.ajax.AjaxManager">
+		<property name="lookupManager" ref="lookupManager" />
+		<dwr:remote javascript="AjaxManager">
+			<dwr:include method="calculateHours" />
+			<dwr:include method="employeesForShop" />
+			<dwr:include method="setDailySalesTabs" />
+			<dwr:include method="getPosReportDateRange" />
+			<dwr:include method="getAvailableDateRange" />
+			<dwr:include method="setShop" />
+			<dwr:include method="hasAvailableReports" />
+			<dwr:include method="getShopSettings" />
+			<dwr:include method="setShopSettings" />
+			<dwr:convert type="bean"
+				class="com.pizza73.webapp.model.DailySalesTabsSettings" />
+		</dwr:remote>
+	</bean>
+
+	<!-- Configure the multipart resolver -->
+	<bean id="multipartResolver"
+		class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+		<!-- one of the properties available; the maximum file size in bytes -->
+		<property name="maxUploadSize" value="2000000" />
+	</bean>
+
+	<!-- =================================================================== -->
+  <!-- Mail: Sender and Velocity configuration                             -->
+  <!-- =================================================================== -->
+  <bean id="mailEngine" class="com.pizza73.service.MailEngine">
+    <property name="mailSender" ref="mailSender" />
+    <property name="velocityEngine" ref="velocityEngine" />
+  </bean>
+  <bean id="mailSender"
+    class="org.springframework.mail.javamail.JavaMailSenderImpl">
+    <property name="javaMailProperties">
+    <props>
+    <prop key="mail.smtp.timeout">2000</prop>
+    <prop key="mail.smtp.connectiontimeout">2000</prop>
+    </props>
+    </property>
+    <property name="host">
+           <value>mercury.nthodom1.ca</value>
+    </property>
+    <property name="username">
+            <value></value>
+    </property>
+    <property name="password">
+            <value></value>
+    </property>
+    <property name="port">
+            <value>25</value>
+    </property>
+  </bean>
+  <!-- Configure Velocity for sending e-mail -->
+  <bean id="velocityEngine"
+    class="org.springframework.ui.velocity.VelocityEngineFactoryBean">
+    <property name="velocityProperties">
+      <props>
+        <prop key="resource.loader">class</prop>
+        <prop key="class.resource.loader.class">
+          org.apache.velocity.runtime.resource.loader.ClasspathResourceLoader
+        </prop>
+        <prop key="velocimacro.library"></prop>
+      </props>
+    </property>
+  </bean>
+  <bean id="mailMessage" class="org.springframework.mail.SimpleMailMessage"
+    scope="prototype" p:from="webadmin@pizza73.com" />
+</beans>

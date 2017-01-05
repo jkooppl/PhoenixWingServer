@@ -1,0 +1,17 @@
+log4j.rootLogger=INFO, PIZZA73_SHOP
+### PIZZA73_SHOP appender
+log4j.appender.PIZZA73_SHOP=org.apache.log4j.DailyRollingFileAppender
+log4j.appender.PIZZA73_SHOP.DatePattern='.'yyyy-MM-dd
+log4j.appender.PIZZA73_SHOP.File=/var/log/tomcat/pizza73Partners.log
+log4j.appender.PIZZA73_SHOP.threshold=INFO
+log4j.appender.PIZZA73_SHOP.layout=org.apache.log4j.PatternLayout
+log4j.appender.PIZZA73_SHOP.layout.ConversionPattern=%d{ABSOLUTE} %5p %c{1}:%L - %m%n
+#log4j.appender.PIZZA73_SHOP.MaxBackupIndex=10
+
+log4j.logger.com.pizza73=INFO,PIZZA73_SHOP
+
+log4j.logger.org.directwebremoting=INFO
+
+log4j.logger.org.springframework=INFO
+
+log4j.logger.org.hibernate=INFO
