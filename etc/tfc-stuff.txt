@@ -1,0 +1,172 @@
+tables
+product_composition_current --> tfc_product
+product_composition_detail_current --> tfc_product_composition
+raw_inv_item_current --> ingredient
+recipe
+prep_inv_item_current --> tfc_item
+prep_inv_item_detail_current --> tfc_item_composition
+ingredient
+
+
+ALTER TABLE prep_inv_item_detail ADD CONSTRAINT foreign_piidcrii FOREIGN KEY (raw_inv_item_id) REFERENCES raw_inv_item_current(id);
+
+select id from product_composition_current where product_id in (select product_id from product);
+
+select id from product_composition_current where product_id not in (select product_id from product);
+
+select * from product_composition_detail_current where product_composition_id in (710,698,697,699);
+
+select * from product_composition_detail_current where product_composition_id in (select id from product_composition_current where product_id not in (select product_id from product));
+
+update tfc_product_composition set product_composition_id = (select tfc_product.product_id from tfc_product  where tfc_product.id = tfc_product_composition.product_composition_id)
+WHERE EXISTS
+  ( SELECT tfc_product.id
+    FROM tfc_product
+    WHERE tfc_product.id = tfc_product_composition.product_composition_id);
+
+select pc.id, pc.product_composition_id, p.id, p.product_id, p.description from tfc_product_composition pc, tfc_product p where p.product_id = pc.product_composition_id;
+select count(*) from tfc_product_composition pc, tfc_product p where p.product_id = pc.product_composition_id;
+
+psql -h deweydog.com -U iqueso -c "select pc.id, pc.product_composition_id, p.id, p.product_id from tfc_product_composition pc, tfc_product p where p.id = pc.product_composition_id" > tfc_prod.txt
+
+
+select * from product_composition_detail_current where product_composition_id not in (select id from product_composition_current) limit 5;
+select count(*) from product_composition_detail_current where product_composition_id in (select id from product_composition_current);
+
+
+SELECT count(*) FROM tfc_product_composition WHERE product_composition_id in (select id from tfc_product);
+
+CREATE SEQUENCE ingredients_id_seq;
+SELECT setval( 'ingredients_id_seq', ( SELECT MAX( id ) FROM ingredient ) );
+ALTER TABLE ingredient ALTER COLUMN id SET DEFAULT nextval( 'ingredients_id_seq' );
+
+CREATE SEQUENCE tfc_item_id_seq;
+SELECT setval( 'tfc_item_id_seq', ( SELECT MAX( id ) FROM tfc_item ) );
+ALTER TABLE tfc_item ALTER COLUMN id SET DEFAULT nextval( 'tfc_item_id_seq' );
+
+CREATE SEQUENCE tfc_item_composition_id_seq;
+SELECT setval( 'tfc_item_composition_id_seq', ( SELECT MAX( id ) FROM tfc_item_composition ) );
+ALTER TABLE tfc_item_composition ALTER COLUMN id SET DEFAULT nextval( 'tfc_item_composition_id_seq' );
+
+CREATE SEQUENCE tfc_product_id_seq;
+SELECT setval( 'tfc_product_id_seq', ( SELECT MAX( id ) FROM tfc_product ) );
+ALTER TABLE tfc_product ALTER COLUMN id SET DEFAULT nextval( 'tfc_product_id_seq' );
+
+
+ALTER TABLE tfc_product
+ADD FOREIGN KEY (product_id) 
+REFERENCES product(product_id);
+
+ALTER TABLE tfc_item_composition
+ADD FOREIGN KEY (ingredient_id) 
+REFERENCES ingredient(id);
+
+ALTER TABLE tfc_product_composition
+ADD FOREIGN KEY (tfc_item_id) 
+REFERENCES tfc_item(id);
+
+ALTER TABLE tfc_product_composition
+ADD FOREIGN KEY (tfc_product_id) 
+REFERENCES tfc_product(id);
+
+
+140 | Apple Juice                     | 10 per case        |   3.84 | juice box    |   10.00 |           516 |      0.38
+141 | Orange Juice                    | 10 per case        |   4.09 | juice box    |   10.00 |           747 |      0.41
+142 | Bacon Bits                      | 5 lbs bag/80 oz    |  37.52 | oz           |   53.33 |           669 |      0.47
+143 | Croutons                        | 1.5 lb bag 24 oz   |   4.65 | oz           |   16.00 |           762 |      0.29
+144 | Salad Dressing                  | 60 x 2 oz          |  17.49 | oz           |   60.00 |           279 |      0.29
+145 | 1 Ltr. Coke                     | 12 case            |  12.85 | can          |   12.00 |           333 |      1.07
+146 | 1 Ltr. Diet Coke                | 12 case            |  12.85 | can          |   12.00 |           334 |      1.07
+147 | Onion Rings                     | 160 oz             |  18.75 | 14 oz per    |  160.00 |           230 |      0.12
+148 | Donair Meat                     | 165 oz             |  32.40 | oz           |  165.00 |           969 |      0.20
+
+
+id  | ingredient_id | tfc_item_id | raw_portions 
+-----+---------------+-------------+--------------
+ 183 |           119 |          97 |         1.00
+(1 row)
+
+iqueso=# select * from tfc_item where tfc_item_id = 97;
+ERROR:  column "tfc_item_id" does not exist
+LINE 1: select * from tfc_item where tfc_item_id = 97;
+                                     ^
+iqueso=# select * from tfc_item where id = 97;
+ id |  description  | yield | portion_descr 
+----+---------------+-------+---------------
+ 97 | 200g Brownies |  1.00 | item
+
+
+insert into tfc_item(description, yield, portion_descr) values ('Apple Juice', 1, 'juice box');
+insert into tfc_item(description, yield, portion_descr) values ('Orange Juice', 1, 'juice box');
+
+insert into tfc_item_composition (ingredient_id, tfc_item_id, raw_portions) values (140,117,1);
+insert into tfc_item_composition (ingredient_id, tfc_item_id, raw_portions) values (141,118,1);
+
+insert into tfc_product(product_id, description,product_modifier_1, product_modifier_2, product_modifier_3) values(366,'Apple Juice Box', 0,0,0);
+insert into tfc_product(product_id, description,product_modifier_1, product_modifier_2, product_modifier_3) values(367,'Orange Juice Box', 0,0,0);
+
+insert into tfc_product_composition(tfc_product_id, tfc_item_id, prep_portions) values (1107,117,1.00);
+insert into tfc_product_composition(tfc_product_id, tfc_item_id, prep_portions) values (1108,118,1.00);
+######
+insert into tfc_item(description, yield, portion_descr) values ('1 Ltr. Coke', 1, '1 Ltr.');
+insert into tfc_item(description, yield, portion_descr) values ('1 Ltr. Diet Coke', 1, '1 Ltr.');
+
+insert into tfc_item_composition (ingredient_id, tfc_item_id, raw_portions) values (145,119,1);
+insert into tfc_item_composition (ingredient_id, tfc_item_id, raw_portions) values (146,120,1);
+
+insert into tfc_product(product_id, description,product_modifier_1, product_modifier_2, product_modifier_3) values(361,'1 Ltr. Coke', 0,0,0);
+insert into tfc_product(product_id, description,product_modifier_1, product_modifier_2, product_modifier_3) values(362,'1 Ltr. Diet Coke', 0,0,0);
+
+insert into tfc_product_composition(tfc_product_id, tfc_item_id, prep_portions) values (1109,119,1.00);
+insert into tfc_product_composition(tfc_product_id, tfc_item_id, prep_portions) values (1110,120,1.00);
+######
+insert into tfc_item(description, yield, portion_descr) values ('Onion Ring', 1, 'oz.');
+insert into tfc_item(description, yield, portion_descr) values ('Donair Meat', 1, 'oz.');
+
+insert into tfc_item_composition (ingredient_id, tfc_item_id, raw_portions) values (145,119,1);
+insert into tfc_item_composition (ingredient_id, tfc_item_id, raw_portions) values (146,120,1);
+
+insert into tfc_product(product_id, description,product_modifier_1, product_modifier_2, product_modifier_3) values(361,'1 Ltr. Coke', 0,0,0);
+insert into tfc_product(product_id, description,product_modifier_1, product_modifier_2, product_modifier_3) values(362,'1 Ltr. Diet Coke', 0,0,0);
+
+insert into tfc_product_composition(tfc_product_id, tfc_item_id, prep_portions) values (1109,119,1.00);
+insert into tfc_product_composition(tfc_product_id, tfc_item_id, prep_portions) values (1110,120,1.00);
+
+insert into tfc_product (product_id, description, product_modifier_1,product_modifier_2,product_modifier_3) values (360, 'Great Canadian Bacon(Reg)',1,1,1);
+insert into tfc_product (product_id, description, product_modifier_1,product_modifier_2,product_modifier_3) values (360, 'Great Canadian Bacon(Big)',2,1,1);
+insert into tfc_product (product_id, description, product_modifier_1,product_modifier_2,product_modifier_3) values (360, 'Great Canadian Bacon(Xlg)',3,1,1);
+
+insert into tfc_product (product_id, description, product_modifier_1,product_modifier_2,product_modifier_3) values (374, 'Donair(Reg)',1,1,1);
+insert into tfc_product (product_id, description, product_modifier_1,product_modifier_2,product_modifier_3) values (374, 'Donair(Big)',2,1,1);
+insert into tfc_product (product_id, description, product_modifier_1,product_modifier_2,product_modifier_3) values (374, 'Donair(Xlg)',3,1,1);
+
+insert into tfc_product_composition(tfc_product_id,tfc_item_id,prep_portions) values(725,4,8.00);
+insert into tfc_product_composition(tfc_product_id,tfc_item_id,prep_portions) values(725,7,3.00);
+insert into tfc_product_composition(tfc_product_id,tfc_item_id,prep_portions) values(725,8,3.50);
+insert into tfc_product_composition(tfc_product_id,tfc_item_id,prep_portions) values(725,9,0.75);
+
+insert into tfc_product_composition(tfc_product_id,tfc_item_id,prep_portions) values(726,4,14.00);
+insert into tfc_product_composition(tfc_product_id,tfc_item_id,prep_portions) values(726,7,4.00);
+insert into tfc_product_composition(tfc_product_id,tfc_item_id,prep_portions) values(726,8,6.00);
+insert into tfc_product_composition(tfc_product_id,tfc_item_id,prep_portions) values(726,9,1.50);
+
+
+insert into tfc_product_composition(tfc_product_id,tfc_item_id,prep_portions) values(1120,4,22.00);
+insert into tfc_product_composition(tfc_product_id,tfc_item_id,prep_portions) values(1120,7,6.00);
+insert into tfc_product_composition(tfc_product_id,tfc_item_id,prep_portions) values(1120,8,8.50);
+insert into tfc_product_composition(tfc_product_id,tfc_item_id,prep_portions) values(1120,9,2.00);
+
+insert into tfc_product (product_id, description, product_modifier_1, product_modifier_2, product_modifier_3) values (384, 'Donair Meat',1,0,0);
+insert into tfc_product (product_id, description, product_modifier_1, product_modifier_2, product_modifier_3) values (384, 'Donair Meat',2,0,0);
+insert into tfc_product (product_id, description, product_modifier_1, product_modifier_2, product_modifier_3) values (384, 'Donair Meat',3,0,0);
+
+insert into tfc_product_composition (tfc_product_id, tfc_item_id, prep_portions) values (1114,121,3.5);
+insert into tfc_product_composition (tfc_product_id, tfc_item_id, prep_portions) values (1115,121,5.0);
+insert into tfc_product_composition (tfc_product_id, tfc_item_id, prep_portions) values (1116,121,6.5);
+
+
+insert into tfc_item_composition (ingredient_id, tfc_item_id, raw_portions) values (148,121,1);
+insert into tfc_item_composition (ingredient_id, tfc_item_id, raw_portions) values (147,122,1);
+
+insert into tfc_product (product_id, description, product_modifier_1, product_modifier_2, product_modifier_3) values (379, 'Onion Rings',0,0,0);
+insert into tfc_product_composition (tfc_product_id, tfc_item_id, prep_portions) values (1117,122,14);

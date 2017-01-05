@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.0.xsd">
+  <!-- Hibernate SessionFactory -->
+  <bean id="sessionFactory"
+    class="org.springframework.orm.hibernate3.annotation.AnnotationSessionFactoryBean">
+    <property name="dataSource" ref="dataSource" />
+    <property name="annotatedPackages">
+      <list>
+        <value>com.pizza73.model</value>
+      </list>
+    </property>
+    <property name="annotatedClasses">
+      <list>
+        <value>com.pizza73.model.ProductCategory</value>
+        <value>com.pizza73.model.Order</value>
+        <value>com.pizza73.model.OrderItem</value>
+        <value>com.pizza73.model.Product</value>
+        <value>com.pizza73.model.ProductDetail</value>
+        <value>com.pizza73.model.ProductComposition</value>
+        <value>com.pizza73.model.ProductProperty</value>
+        <value>com.pizza73.model.ProductSize</value>
+        <value>com.pizza73.model.ProductSizeCategory</value>
+        <value>com.pizza73.model.Shop</value>
+        <value>com.pizza73.model.Menu</value>
+        <value>com.pizza73.model.Municipality</value>
+        <value>com.pizza73.model.Location</value>
+        <value>com.pizza73.model.StreetAddress</value>
+        <value>com.pizza73.model.StreetTypeCodeMap</value>
+        <value>com.pizza73.model.OnlineCustomer</value>
+        <value>com.pizza73.model.Role</value>
+        <value>com.pizza73.model.Driver</value>
+        <value>com.pizza73.model.Info</value>
+        <value>com.pizza73.model.conversion.Sales</value>
+        <value>com.pizza73.model.conversion.Audit</value>
+        <value>com.pizza73.model.Credit</value>
+        <value>com.pizza73.model.Employee</value>
+        <value>com.pizza73.model.Payroll</value>
+        <value>com.pizza73.model.Coupon</value>
+        <value>com.pizza73.model.CouponDetail</value>
+        <value>com.pizza73.model.CouponRedemption</value>
+        <value>com.pizza73.model.DailySales</value>
+        <value>com.pizza73.model.WirelessBatchRecord</value>
+        <value>com.pizza73.model.WeeklySales</value>
+        <value>com.pizza73.model.PayYearPeriod</value>
+      </list>
+    </property>
+    <property name="hibernateProperties">
+      <props>
+        <prop key="hibernate.dialect">
+          org.hibernate.dialect.PostgreSQLDialect
+        </prop>
+        <!--<prop key="hibernate.query.substitutions"> true 'Y', false 'N' 
+          </prop> -->
+        <prop key="hibernate.show_sql">false</prop>
+        <!-- Create/update the database tables automatically when the JVM 
+          starts up <prop key="hibernate.hbm2ddl.auto">update</prop> -->
+        <!-- Turn batching off for better error messages under PostgreSQL 
+          for dev only -->
+        <prop key="hibernate.jdbc.batch_size">0</prop>
+      </props>
+    </property>
+  </bean>
+  <!-- Transaction manager for a single Hibernate SessionFactory (alternative 
+    to JTA) -->
+  <bean id="transactionManager"
+    class="org.springframework.orm.hibernate3.HibernateTransactionManager">
+    <property name="sessionFactory" ref="sessionFactory" />
+  </bean>
+  <bean id="universalDao" class="com.pizza73.dao.hibernate.UniversalDaoHibernate">
+    <property name="sessionFactory" ref="sessionFactory" />
+  </bean>
+  <!-- LookupDao: Hibernate implementation -->
+  <bean id="lookupDao" class="com.pizza73.dao.hibernate.LookupDaoHibernate">
+    <property name="sessionFactory" ref="sessionFactory" />
+  </bean>
+  <!-- OrderDao: Hibernate implementation -->
+  <bean id="orderDao" class="com.pizza73.dao.hibernate.OrderDaoHibernate">
+    <property name="sessionFactory" ref="sessionFactory" />
+  </bean>
+  <bean id="userDao" class="com.pizza73.dao.hibernate.UserDaoHibernate">
+    <property name="sessionFactory" ref="sessionFactory" />
+  </bean>
+  <bean id="employeeDao" class="com.pizza73.dao.hibernate.EmployeeDaoHibernate">
+    <property name="sessionFactory" ref="sessionFactory" />
+  </bean>
+  <bean id="payrollDao" class="com.pizza73.dao.hibernate.PayrollDaoHibernate">
+    <property name="sessionFactory" ref="sessionFactory" />
+  </bean>
+  <bean id="salesDao" class="com.pizza73.dao.hibernate.SalesDaoHibernate">
+    <property name="sessionFactory" ref="sessionFactory" />
+  </bean>
+  <bean id="auditDao" class="com.pizza73.dao.hibernate.AuditDaoHibernate">
+    <property name="sessionFactory" ref="sessionFactory" />
+  </bean>
+  <bean id="couponDao" class="com.pizza73.dao.hibernate.CouponDaoHibernate">
+    <property name="sessionFactory" ref="sessionFactory" />
+  </bean>
+</beans>

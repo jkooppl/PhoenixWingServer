@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+  xmlns:tx="http://www.springframework.org/schema/tx"
+  xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.0.xsd
+            http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-2.0.xsd
+            http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-2.0.xsd"
+  default-lazy-init="true">
+  <!-- =================================================================== -->
+  <!-- AOP: Configuration and Aspects -->
+  <!-- =================================================================== -->
+  <aop:config>
+    <!-- aop:advisor id="userManagerTx" advice-ref="userManagerTxAdvice" 
+      pointcut="execution(* *..service.UserManager.*(..))" order="0" / -->
+    <aop:advisor id="managerTx" advice-ref="txAdvice"
+      pointcut="execution(* *..service.*.*Manager.*(..))" order="0" />
+  </aop:config>
+  <aop:config proxy-target-class="true">
+    <aop:aspect ref="auditLog">
+      <!-- aop:pointcut id="auditLogGet" expression="execution(public com.pizza73.service.EmployeeManager*.*(..))" 
+        /> <aop:after-returning pointcut-ref="auditLogGet" method="logGet" /> -->
+      <aop:pointcut id="auditLogin"
+        expression="execution(* com.pizza73.dao.hibernate.*DaoHibernate.loadUserByUsername(String))" />
+      <aop:after-returning pointcut-ref="auditLogin"
+        method="logLogin" />
+      <aop:pointcut id="auditLogSearch"
+        expression="execution(* com.pizza73.service.impl.PayrollManagerImpl.*Payroll*(..))" />
+      <aop:after-returning pointcut-ref="auditLogSearch"
+        method="logGet" />
+
+      <aop:pointcut id="auditLogAdminUpdate"
+        expression="execution(* com.pizza73.service.impl.OrderManagerImpl.adminUpdate(..))" />
+      <aop:after-returning pointcut-ref="auditLogAdminUpdate"
+        method="logAdminUpdate" />
+    </aop:aspect>
+  </aop:config>
+  <!-- Enable @Transactional support -->
+  <tx:annotation-driven />
+  <!-- Fix bug in Spring 2.0.6: http://issues.appfuse.org/browse/APF-887 -->
+  <!-- bean class="org.springframework.transaction.aspectj.AnnotationTransactionAspect" 
+    factory-method="aspectOf" dependency-check="none" lazy-init="false"> <property 
+    name="transactionManager" ref="transactionManager" /> </bean -->
+  <!-- Enable @AspectJ support -->
+  <aop:aspectj-autoproxy />
+  <!-- Enable @Configured support -->
+  <aop:spring-configured />
+  <tx:advice id="txAdvice">
+    <tx:attributes>
+
+      <tx:method name="*" read-only="true" propagation="REQUIRED" />
+    </tx:attributes>
+  </tx:advice>
+  <!-- tx:advice id="userManagerTxAdvice"> <tx:attributes> <tx:method name="save*" 
+    rollback-for="UserExistsException" /> </tx:attributes> </tx:advice -->
+  <!-- =================================================================== -->
+  <!-- Mail: Sender and Velocity configuration -->
+  <!-- =================================================================== -->
+  <bean id="mailEngine" class="com.pizza73.service.MailEngine">
+    <property name="mailSender" ref="mailSender" />
+    <property name="velocityEngine" ref="velocityEngine" />
+  </bean>
+  <bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
+    <property name="host" value="${mail.host}" />
+    <property name="username" value="${mail.username}" />
+    <property name="password" value="${mail.password}" />
+  </bean>
+  <!-- Configure Velocity for sending e-mail -->
+  <bean id="velocityEngine"
+    class="org.springframework.ui.velocity.VelocityEngineFactoryBean">
+    <property name="velocityProperties">
+      <props>
+        <prop key="resource.loader">class</prop>
+        <prop key="class.resource.loader.class">
+          org.apache.velocity.runtime.resource.loader.ClasspathResourceLoader
+        </prop>
+        <prop key="velocimacro.library"></prop>
+      </props>
+    </property>
+  </bean>
+  <bean id="mailMessage" class="org.springframework.mail.SimpleMailMessage"
+    scope="prototype">
+    <property name="from" value="${mail.default.from}" />
+  </bean>
+  <!-- =================================================================== -->
+  <!-- Managers: For accessing DAOs -->
+  <!-- =================================================================== -->
+  <bean id="manager" class="com.pizza73.service.impl.UniversalManagerImpl">
+    <property name="universalDao" value="universalDao" />
+  </bean>
+  <bean id="lookupManager" class="com.pizza73.service.impl.LookupManagerImpl">
+    <!--property name="lookupDao" value="lookupDao" / -->
+    <constructor-arg ref="lookupDao" />
+  </bean>
+  <bean id="userManager" class="com.pizza73.service.impl.UserManagerImpl">
+    <constructor-arg ref="userDao" />
+    <constructor-arg ref="mailEngine" />
+    <constructor-arg ref="mailMessage" />
+    <constructor-arg value="accountCreated.vm" />
+  </bean>
+  <bean id="payrollManager" class="com.pizza73.service.impl.PayrollManagerImpl">
+    <constructor-arg ref="payrollDao" />
+    <constructor-arg ref="employeeManager" />
+    <constructor-arg ref="lookupManager" />
+  </bean>
+  <bean id="employeeManager" class="com.pizza73.service.impl.EmployeeManagerImpl">
+    <constructor-arg ref="employeeDao" />
+  </bean>
+  <bean id="salesManager" class="com.pizza73.service.impl.SalesManagerImpl">
+    <constructor-arg ref="salesDao" />
+  </bean>
+  <bean id="orderManager" class="com.pizza73.service.impl.OrderManagerImpl">
+    <constructor-arg ref="orderDao" />
+    <constructor-arg ref="lookupManager" />
+    <constructor-arg ref="mailEngine" />
+    <constructor-arg ref="mailMessage" />
+    <constructor-arg value="orderConfirmation.vm" />
+  </bean>
+
+  <bean id="auditManager" class="com.pizza73.service.impl.AuditManagerImpl">
+    <constructor-arg ref="auditDao" />
+  </bean>
+
+  <bean id="pricingManager" class="com.pizza73.service.impl.PricingManagerImpl">
+    <property name="lookupManager" ref="lookupManager" />
+  </bean>
+
+  <bean id="replicationManager" class="com.pizza73.service.impl.ReplicationManagerImpl">
+    <constructor-arg>
+      <bean class="com.pizza73.dao.hibernate.GenericDaoHibernate"
+        autowire="byType">
+        <constructor-arg value="com.pizza73.model.conversion.Sales" />
+      </bean>
+    </constructor-arg>
+    <constructor-arg ref="conversionDao" />
+  </bean>
+
+  <bean id="couponManager" class="com.pizza73.service.impl.CouponManagerImpl">
+    <constructor-arg ref="couponDao" />
+  </bean>
+  <bean id="cartManager" class="com.pizza73.service.dwr.impl.CartManagerImpl">
+    <property name="lookupManager" ref="lookupManager"></property>
+    <property name="pricingManager" ref="pricingManager"></property>
+  </bean>
+  <!-- ASPECTS -->
+  <bean id="auditLog" class="com.pizza73.aspect.AuditLog">
+    <property name="auditManager" ref="auditManager" />
+  </bean>
+</beans>

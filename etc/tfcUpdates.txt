@@ -1,0 +1,46 @@
+
+CREATE SEQUENCE ingredients_id_seq;
+SELECT setval( 'ingredients_id_seq', ( SELECT MAX( id ) FROM ingredient ) );
+ALTER TABLE ingredient ALTER COLUMN id SET DEFAULT nextval( 'ingredients_id_seq' );
+
+insert into ingredient (impact_number,description, size, portion_type, yield, cost,unit_cost) 
+values (516,'Apple Juice','10 per case','case',10,3.84,0.384);
+insert into ingredient (impact_number,description, size, portion_type, yield, cost,unit_cost) 
+values (747,'Orange Juice','10 per case','case',10,4.09,.409);
+insert into ingredient (impact_number,description, size, portion_type, yield, cost,unit_cost) 
+values (669,'Bacon Bits','5 lbs bag/80 oz','oz',53.33,37.52,.469);
+insert into ingredient (impact_number,description, size, portion_type, yield, cost,unit_cost) 
+values (762,'Croutons','1.5 lb bag 24 oz','oz', 16,4.65,.290625);
+insert into ingredient (impact_number,description, size, portion_type, yield, cost,unit_cost) 
+values (279,'Salad Dressing','60 x 2 oz','oz',60,17.49,.2915);
+insert into ingredient (impact_number,description, size, portion_type, yield, cost,unit_cost) 
+values (333,'1 Ltr. Coke','12 case','can',12,12.85,1.07083);
+insert into ingredient (impact_number,description, size, portion_type, yield, cost,unit_cost) 
+values (334,'1 Ltr. Diet Coke','12 case','can',12,12.85,1.07083);
+insert into ingredient (impact_number,description, size, portion_type, yield, cost,unit_cost) 
+values (230,'Onion Rings','160 oz','14 oz per',160,18.75,.11718);
+insert into ingredient (impact_number,description, size, portion_type, yield, cost,unit_cost) 
+values (969,'Donair Meat','165 oz','oz',165,32.40,.19636);
+
+
+CREATE TABLE packaging_cost (
+    id serial,
+    name character varying(32) NOT NULL,
+    size integer not null default 0,
+    cost numeric(6,2) not null,
+    PRIMARY KEY(id)
+);
+insert into packaging_cost(name,size,cost) values('14" Double Box',3,1.08);
+insert into packaging_cost(name,size,cost) values('12" Double Box',2,0.84);
+insert into packaging_cost(name,size,cost) values('9" Double Box',1,0.58);
+insert into packaging_cost(name,size,cost) values('18" 4 Pack Box',0,1.15);
+insert into packaging_cost(name,size,cost) values('14"" Single box',0,0.77);
+insert into packaging_cost(name,size,cost) values('12" Single Box',0,0.58);
+insert into packaging_cost(name,size,cost) values('9" Single Box',0,0.39);
+insert into packaging_cost(name,size,cost) values('6" School Box',0,0.16);
+insert into packaging_cost(name,size,cost) values('Large Side Box',0,0.35);
+insert into packaging_cost(name,size,cost) values('Small Fry Box',0,0.25);
+insert into packaging_cost(name,size,cost) values('Slice Trays',0,0.06);
+insert into packaging_cost(name,size,cost) values('Dippza Bag',0,0.18);
+insert into packaging_cost(name,size,cost) values('Salad Containers',0,0.82);
+

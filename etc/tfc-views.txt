@@ -1,0 +1,47 @@
+create view product_cost as
+select p.product_id
+	, p.product_modifier_1
+	, pii.id
+	, pii.yield
+	, (sum(rii.unit_cost * piid.raw_portions)  / pii.yield) * pcd.prep_portions as total_cost
+	from tfc_product p
+inner join tfc_product_composition pcd on(pcd.tfc_product_id = p.id)
+inner join tfc_item_composition piid on(pcd.tfc_item_id = piid.tfc_item_id)
+inner join tfc_item pii on (pii.id = piid.tfc_item_id)
+inner join ingredient rii on(rii.id = piid.ingredient_id) 
+group by p.product_id, p.product_modifier_1,  pii.id, pii.yield, pcd.prep_portions order by p.product_id;
+
+create view product_cost2 as
+select p.product_id
+    , p.product_modifier_1
+    , pii.id
+    , pii.yield
+    , (sum(rii.unit_cost)) * pcd.prep_portions as total_cost
+    from tfc_product p
+inner join tfc_product_composition pcd on(pcd.tfc_product_id = p.id)
+inner join tfc_item_composition piid on(pcd.tfc_item_id = piid.tfc_item_id)
+inner join tfc_item pii on (pii.id = piid.tfc_item_id)
+inner join ingredient rii on(rii.id = piid.ingredient_id) 
+group by p.product_id, p.product_modifier_1,  pii.id, pii.yield, pcd.prep_portions order by p.product_id;
+ 
+create view product_total_cost as 
+select pc.product_id, prod.product_descr_full, pc.product_modifier_1, sum(pc.total_cost) as total_cost
+from product_cost pc
+inner join product prod on (prod.product_id = pc.product_id)
+ group by pc.product_id, pc.product_modifier_1, prod.product_descr_full;
+
+create view recipe as
+select pc.product_id
+	, prod.description_full
+	, pc.product_modifier_1 as size_id
+	, pii.description as product_name
+	, rii.description as ingredient_name
+	, pii.portion_descr
+	, pcd.prep_portions
+	from product_composition_current pc
+inner join product_composition_detail_current pcd on(pcd.product_composition_id = pc.id)
+inner join prep_inv_item_detail_current piid on(pcd.prep_inv_item_id = piid.prep_inv_item_id)
+inner join prep_inv_item_current pii on (pii.id = piid.prep_inv_item_id)
+inner join raw_inv_item_current rii on(rii.id = piid.raw_inv_item_id)
+inner join iq2_product prod on(prod.product_id = pc.product_id)
+order by pc.product_id, size_id, pii.id;
