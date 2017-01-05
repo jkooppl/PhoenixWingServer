@@ -1,0 +1,6 @@
+<aspectj>
+<aspects>
+<aspect name="com.pizza73.aspect.AuditLog"/>
+</aspects>
+</aspectj>
+

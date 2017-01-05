@@ -1,0 +1,26 @@
+<!DOCTYPE hibernate-mapping PUBLIC 
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="com.pizza73.model.conversion">
+
+  <class name="SalesDetail" table="sales_detail">
+    <composite-id>
+      <key-property name="orderId" column="order_id" />
+      <key-property name="productId" column="product_id" />
+      <key-property name="modifierOne" column="product_modifier_1" />
+      <key-property name="modifierTwo" column="product_modifier_2" />
+      <key-property name="modifierThree" column="product_modifier_3" />
+      <key-property name="modifierFour" column="product_modifier_4" />
+      <key-property name="addOns" column="product_addons" />
+      <key-property name="quantity" column="quantity" />
+      <key-property name="info" column="product_info" />
+      <key-property name="price" column="price" />
+    </composite-id>
+
+    <sql-insert>INSERT INTO sales_detail (order_id, product_id,
+      product_modifier_1, product_modifier_2, product_modifier_3,
+      product_modifier_4, product_addons, quantity, product_info, price)
+      VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)</sql-insert>
+  </class>
+</hibernate-mapping>

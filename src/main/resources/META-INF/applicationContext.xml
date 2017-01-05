@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Application context definition for CSCAdmin on Hibernate. -->
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xmlns:p="http://www.springframework.org/schema/p" xmlns:context="http://www.springframework.org/schema/context"
+  xmlns:aop="http://www.springframework.org/schema/aop" xmlns:tx="http://www.springframework.org/schema/tx" xmlns:task="http://www.springframework.org/schema/task"
+  xmlns:util="http://www.springframework.org/schema/util"
+  xsi:schemaLocation="
+     http://www.springframework.org/schema/beans
+     http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
+     http://www.springframework.org/schema/context
+     http://www.springframework.org/schema/context/spring-context-3.1.xsd
+     http://www.springframework.org/schema/aop
+     http://www.springframework.org/schema/aop/spring-aop-3.1.xsd
+     http://www.springframework.org/schema/tx
+     http://www.springframework.org/schema/tx/spring-tx-3.1.xsd
+     http://www.springframework.org/schema/task
+     http://www.springframework.org/schema/task/spring-task-3.1.xsd
+     http://www.springframework.org/schema/util
+     http://www.springframework.org/schema/util/spring-util-3.1.xsd">
+
+  <bean id="persistenceExceptionTranslation" class="org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor" />
+
+  <context:annotation-config />
+  <!-- Auto-detected beans labeled with @Repository and @Service. -->
+  <context:component-scan base-package="com.pizza73" />
+
+
+  <!-- Instruct Spring to perform declarative transaction management automatically on annotated classes. -->
+  <tx:annotation-driven />
+
+  <!-- Hibernate SessionFactory -->
+  <bean id="sessionFactory" class="org.springframework.orm.hibernate3.annotation.AnnotationSessionFactoryBean"
+    p:dataSource-ref="dataSource">
+    <property name="annotatedPackages">
+      <list>
+        <value>com.pizza73.model</value>
+      </list>
+    </property>
+    <property name="annotatedClasses">
+      <list>
+        <value>com.pizza73.model.ProductCategory</value>
+        <value>com.pizza73.model.Order</value>
+        <value>com.pizza73.model.OrderItem</value>
+        <value>com.pizza73.model.Product</value>
+        <value>com.pizza73.model.ProductDetail</value>
+        <value>com.pizza73.model.ProductDetailOption</value>
+        <value>com.pizza73.model.ProductComposition</value>
+        <value>com.pizza73.model.ProductProperty</value>
+        <value>com.pizza73.model.ProductSize</value>
+        <value>com.pizza73.model.ProductSizeCategory</value>
+        <value>com.pizza73.model.Shop</value>
+        <value>com.pizza73.model.Menu</value>
+        <value>com.pizza73.model.Municipality</value>
+        <value>com.pizza73.model.Location</value>
+        <value>com.pizza73.model.StreetAddress</value>
+        <value>com.pizza73.model.StreetTypeCodeMap</value>
+        <value>com.pizza73.model.OnlineCustomer</value>
+        <value>com.pizza73.model.Role</value>
+        <value>com.pizza73.model.Driver</value>
+        <value>com.pizza73.model.Info</value>
+        <value>com.pizza73.model.conversion.Sales</value>
+        <value>com.pizza73.model.conversion.SalesDetail</value>
+        <value>com.pizza73.model.conversion.SalesDetailComposition</value>
+        <value>com.pizza73.model.conversion.Audit</value>
+        <value>com.pizza73.model.Credit</value>
+        <value>com.pizza73.model.Employee</value>
+        <value>com.pizza73.model.Payroll</value>
+        <value>com.pizza73.model.Coupon</value>
+        <value>com.pizza73.model.CouponDetail</value>
+        <value>com.pizza73.model.CouponRedemption</value>
+        <value>com.pizza73.model.BusinessHourException</value>
+        <value>com.pizza73.model.DailySales</value>
+        <value>com.pizza73.model.BatchRecord</value>
+        <value>com.pizza73.model.WeeklySales</value>
+        <value>com.pizza73.model.PayYearPeriod</value>
+        <value>com.pizza73.model.GL</value>
+        <value>com.pizza73.model.OrderComment</value>
+        <value>com.pizza73.model.ReportPosDaily</value>
+        <value>com.pizza73.model.MunicipalityBusinessHours</value>
+        <value>com.pizza73.model.UniqueCoupon</value>
+        <value>com.pizza73.model.Blacklist</value>
+        <value>com.pizza73.model.HolidayHours</value>
+        <value>com.pizza73.model.HolidayHoursCityException</value>
+        <value>com.pizza73.model.contest.Contest</value>
+        <value>com.pizza73.model.contest.ContestEntry</value>
+        <value>com.pizza73.model.contest.SpinToWinPrize</value>
+        <value>com.pizza73.model.ProductOutage</value>
+      </list>
+    </property>
+    <property name="hibernateProperties">
+      <props>
+        <prop key="hibernate.dialect">
+          org.hibernate.dialect.PostgreSQLDialect
+        </prop>
+        <!-- <prop key="hibernate.show_sql">true</prop> -->
+      </props>
+    </property>
+  </bean>
+
+  <!-- Transaction manager for a single Hibernate SessionFactory (alternative to JTA) -->
+  <bean id="transactionManager" class="org.springframework.orm.hibernate3.HibernateTransactionManager"
+    p:sessionFactory-ref="sessionFactory" />
+
+  <!-- =================================================================== -->
+  <!-- Mail: Sender and Velocity configuration -->
+  <!-- =================================================================== -->
+  <bean id="mailEngine" class="com.pizza73.service.MailEngine">
+    <property name="mailSender" ref="mailSender" />
+    <property name="velocityEngine" ref="velocityEngine" />
+  </bean>
+  <bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
+    <property name="javaMailProperties">
+      <props>
+        <prop key="mail.smtp.timeout">2000</prop>
+        <prop key="mail.smtp.connectiontimeout">2000</prop>
+      </props>
+    </property>
+    <property name="host">
+      <value>mercury.nthodom1.ca</value>
+    </property>
+    <property name="username">
+      <value></value>
+    </property>
+    <property name="password">
+      <value></value>
+    </property>
+    <property name="port">
+      <value>25</value>
+    </property>
+  </bean>
+  <!-- Configure Velocity for sending e-mail -->
+  <bean id="velocityEngine" class="org.springframework.ui.velocity.VelocityEngineFactoryBean">
+    <property name="velocityProperties">
+      <props>
+        <prop key="resource.loader">class</prop>
+        <prop key="class.resource.loader.class">
+          org.apache.velocity.runtime.resource.loader.ClasspathResourceLoader
+        </prop>
+        <prop key="velocimacro.library"></prop>
+      </props>
+    </property>
+  </bean>
+  <bean id="mailMessage" class="org.springframework.mail.SimpleMailMessage" scope="prototype" p:from="webadmin@pizza73.com" />
+
+  <!-- WEB SERVICE -->
+  <bean id="jaxb2Marshaller" class="org.springframework.oxm.jaxb.Jaxb2Marshaller">
+    <property name="contextPath" value="com.pizza73.ws.industrymailout.subscriber" />
+  </bean>
+  <bean id="messageFactory" class="org.springframework.ws.soap.saaj.SaajSoapMessageFactory">
+    <property name="soapVersion">
+      <util:constant static-field="org.springframework.ws.soap.SoapVersion.SOAP_12" />
+    </property>
+  </bean>
+  <bean id="subscriberWSTemplate" class="org.springframework.ws.client.core.WebServiceTemplate">
+    <constructor-arg ref="messageFactory" />
+    <property name="defaultUri" value="http://www.mymailout.net/MyMailout/WebService/SubscriberManager.asmx" />
+    <property name="marshaller" ref="jaxb2Marshaller" />
+    <property name="unmarshaller" ref="jaxb2Marshaller" />
+  </bean>
+
+
+  <bean id="codeMap" class="java.util.HashMap">
+    <constructor-arg>
+      <value>#{lookupManager.streetTypeCodeMap()}</value>
+    </constructor-arg>
+  </bean>
+</beans>

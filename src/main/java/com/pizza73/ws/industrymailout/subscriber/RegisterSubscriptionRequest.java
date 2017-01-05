@@ -1,0 +1,136 @@
+package com.pizza73.ws.industrymailout.subscriber;
+
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlSchemaType;
+import javax.xml.bind.annotation.XmlType;
+import javax.xml.datatype.XMLGregorianCalendar;
+
+/**
+ * <p>
+ * Java class for anonymous complex type.
+ * 
+ * <p>
+ * The following schema fragment specifies the expected content contained within
+ * this class.
+ * 
+ * <pre>
+ * &lt;complexType>
+ *   &lt;complexContent>
+ *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
+ *       &lt;sequence>
+ *         &lt;element name="mailinglistid" type="{http://www.w3.org/2001/XMLSchema}int"/>
+ *         &lt;element name="email" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
+ *         &lt;element name="datafield" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
+ *         &lt;element name="expiryDateUTC" type="{http://www.w3.org/2001/XMLSchema}dateTime"/>
+ *       &lt;/sequence>
+ *     &lt;/restriction>
+ *   &lt;/complexContent>
+ * &lt;/complexType>
+ * </pre>
+ * 
+ * 
+ */
+@XmlAccessorType(XmlAccessType.FIELD)
+@XmlType(name = "", propOrder = { "mailinglistid", "email", "datafield", "expiryDateUTC" })
+@XmlRootElement(name = "RegisterSubscriptionRequest")
+public class RegisterSubscriptionRequest
+{
+
+    protected int mailinglistid;
+    protected String email;
+    protected String datafield;
+    @XmlElement(required = true)
+    @XmlSchemaType(name = "dateTime")
+    protected XMLGregorianCalendar expiryDateUTC;
+
+    /**
+     * Gets the value of the mailinglistid property.
+     * 
+     */
+    public int getMailinglistid()
+    {
+        return this.mailinglistid;
+    }
+
+    /**
+     * Sets the value of the mailinglistid property.
+     * 
+     */
+    public void setMailinglistid(int value)
+    {
+        this.mailinglistid = value;
+    }
+
+    /**
+     * Gets the value of the email property.
+     * 
+     * @return possible object is {@link String }
+     * 
+     */
+    public String getEmail()
+    {
+        return this.email;
+    }
+
+    /**
+     * Sets the value of the email property.
+     * 
+     * @param value
+     *            allowed object is {@link String }
+     * 
+     */
+    public void setEmail(String value)
+    {
+        this.email = value;
+    }
+
+    /**
+     * Gets the value of the datafield property.
+     * 
+     * @return possible object is {@link String }
+     * 
+     */
+    public String getDatafield()
+    {
+        return this.datafield;
+    }
+
+    /**
+     * Sets the value of the datafield property.
+     * 
+     * @param value
+     *            allowed object is {@link String }
+     * 
+     */
+    public void setDatafield(String value)
+    {
+        this.datafield = value;
+    }
+
+    /**
+     * Gets the value of the expiryDateUTC property.
+     * 
+     * @return possible object is {@link XMLGregorianCalendar }
+     * 
+     */
+    public XMLGregorianCalendar getExpiryDateUTC()
+    {
+        return this.expiryDateUTC;
+    }
+
+    /**
+     * Sets the value of the expiryDateUTC property.
+     * 
+     * @param value
+     *            allowed object is {@link XMLGregorianCalendar }
+     * 
+     */
+    public void setExpiryDateUTC(XMLGregorianCalendar value)
+    {
+        this.expiryDateUTC = value;
+    }
+
+}
